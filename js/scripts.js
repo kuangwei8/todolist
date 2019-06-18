@@ -63,12 +63,8 @@ function displayTodoList(todoListToDisplay) {
 
 function attachTaskListeners(){
   $("ul#todoList").on("click","li",function(){
-    $("ul#todoList").addClass(".red");
-    console.log("This id of this <li> is " + this.id + ".")
-
-    // todoList.deleteTask(this.id);
-    // $("#todoList")hide();
-    // console.log(todoList.tasks);
+    $(this).addClass("red");
+    // console.log("This id of this <li> is " + this.id + ".")
     });
 
 };
@@ -78,8 +74,13 @@ $(document).ready(function(){
   $("form").submit(function(event){
     event.preventDefault();
     var inputTaskName = $("input#new-task").val();
+    $("input#new-task").val("");
     var newTask = new Task(inputTaskName);
     todoList.addTask(newTask);
     displayTodoList(todoList);
-  })
-})
+  });
+  $("#remove").click(function(){
+    $(".red").slideUp();
+
+  });
+});
