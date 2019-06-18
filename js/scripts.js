@@ -27,7 +27,7 @@ TodoList.prototype.findTask = function(id){
 
 TodoList.prototype.deleteTask = function(id){
   for (var i=0; i<this.tasks.length; i++){
-    if(this.task[i]){
+    if(this.tasks[i]){
       if(this.tasks[i].id == id) {
         delete this.tasks[i];
         return true;
@@ -60,7 +60,21 @@ function displayTodoList(todoListToDisplay) {
   todoList.html(htmlForTodoList);
 };
 
+
+function attachTaskListeners(){
+  $("ul#todoList").on("click","li",function(){
+    $("ul#todoList").addClass(".red");
+    console.log("This id of this <li> is " + this.id + ".")
+
+    // todoList.deleteTask(this.id);
+    // $("#todoList")hide();
+    // console.log(todoList.tasks);
+    });
+
+};
+
 $(document).ready(function(){
+  attachTaskListeners();
   $("form").submit(function(event){
     event.preventDefault();
     var inputTaskName = $("input#new-task").val();
